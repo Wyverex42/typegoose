@@ -80,6 +80,9 @@ export class Typegoose {
     const instanceMethods = methods.instanceMethods[name];
     if (instanceMethods) {
       sch.methods = Object.assign(instanceMethods, sch.methods || {});
+      if (typeof instanceMethods.initialize === "function") {
+        sch.queue("initialize", []);
+      }
     } else {
       sch.methods = sch.methods || {};
     }
